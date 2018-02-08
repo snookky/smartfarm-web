@@ -47,20 +47,23 @@
 <script>
   function checkSame (name) {
     return new Promise(function (resolve,reject){
-      let status = false
       let firebaseRef = firebase.database().ref('users');
-      firebaseRef.on("value", function (snapshot) {  
-          console.log('snapshot', snapshot)
-          let users = []
+      let users = []
+      firebaseRef.on("value", function (snapshot) {
+          console.log('snapshot:', snapshot.val()) // snapshot.val() {{name: 'ben', email: '@#hotmi.com', password: '1234'},{name: 'ben', email: '@#hotmi.com', password: '1234'}}
           snapshot.forEach(function (data) {
+            console.log('forEach', data.val())
             users.push(data.val());
           })
-            let checkSame = users.find(function(u) {
+          console.log('users', users)
+
+            let checkSame = users.find(function(u) { //users =[{name: 'ben', email: '@#hotmi.com', password: '1234'},{name: 'ben2', email: '@#hotmi.com', password: '1234'}]
+            console.log('u.name: ', u.name , ' name: ' + name)
               return u.name == name
-            })            
-            console.log('check', checkSame)
+            })
+            console.log('checkSame', checkSame)
             if(checkSame !== undefined) {
-              resolve(true)                            
+              resolve(true)
             } else {
               resolve (false)
             }
@@ -71,36 +74,36 @@
         var name = document.getElementById("name").value
         var email = document.getElementById("email").value
         var password = document.getElementById("password").value
-        if (name !== '' || email !== '' || password !== '') {                                      
-        checkSame(name).then(function(value) {
-          console.log('checkSame: ' , value)
-          if(value !== true) {
-            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error, test) {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log('register', errorCode, errorMessage)
-                console.log('test', test)
-            })
-            .then(function (success) {
-              if (success !== undefined) {
-                var firebaseRef = firebase.database().ref('users');
-                firebaseRef.push({
-                    name,
-                    email,
-                    password
-                }).then(re => {
-                    window.location = 'home.html'
-                })
-              }                
-            })
-          } else {
-            window.alert('ชื่อซ้ำ')
-          }
-        })
+        if (name !== '' || email !== '' || password !== '') {
+          checkSame(name).then(function(value) {
+            console.log('checkSame: ' , value)
+            if(value !== true) {
+              firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error, test) {
+                  var errorCode = error.code;
+                  var errorMessage = error.message;
+                  console.log('register', errorCode, errorMessage)
+                  console.log('test', test)
+              })
+              .then(function (success) {
+                if (success !== undefined) {
+                  var firebaseRef = firebase.database().ref('users');
+                  firebaseRef.push({
+                      name,
+                      email,
+                      password
+                  }).then(re => {
+                      window.location = 'home.html'
+                  })
+                }
+              })
+            } else {
+              window.alert('ชื่อซ้ำ')
+            }
+          })
         } else {
-          window.alert('กรุณากรอกข้อมูลให้ครบถ้วน')        
+          window.alert('กรุณากรอกข้อมูลให้ครบถ้วน')
         }
-          
+
     }
 </script>
 
