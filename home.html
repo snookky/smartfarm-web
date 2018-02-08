@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDk51ePE-urT7Is4Qn8h04CZJlT8tjgSFk",
+        authDomain: "senior-project-5657a.firebaseapp.com",
+        databaseURL: "https://senior-project-5657a.firebaseio.com",
+        projectId: "senior-project-5657a",
+        storageBucket: "senior-project-5657a.appspot.com",
+        messagingSenderId: "1089154992933"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+</head>
+
+<body>
+    <h2>สวัสดี
+        <span id="email"></span>
+    </h2>
+    <button onclick="Logout()">ลงชื่อออก</button>
+</body>
+<script>
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // User is signed in.
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var isAnonymous = user.isAnonymous;
+            var uid = user.uid;
+            var providerData = user.providerData;
+            document.getElementById('email').innerHTML = email
+            console.log(email, uid)
+            // ...
+        } else {
+            window.location = 'index.html'
+        }
+    });
+
+    function Logout() {
+        firebase.auth().signOut();
+    }
+</script>
+
+</html>

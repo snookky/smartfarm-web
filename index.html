@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDk51ePE-urT7Is4Qn8h04CZJlT8tjgSFk",
+        authDomain: "senior-project-5657a.firebaseapp.com",
+        databaseURL: "https://senior-project-5657a.firebaseio.com",
+        projectId: "senior-project-5657a",
+        storageBucket: "senior-project-5657a.appspot.com",
+        messagingSenderId: "1089154992933"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+</head>
+
+<body>
+
+    <div class="box">
+      <h2>เข้าสู่ระบบ</h2>
+        <div class="inputBox">
+          <input type="text" name="" required="" id="email">
+          <label>Email</label>
+        </div>
+        <div class="inputBox">
+          <input type="password" name="" required="" id="password">
+          <label>Password</label>
+        </div>
+          <button onclick="Login()" type="submit">เข้าสู่ระบบ</button><br>
+          <button onclick="window.location = 'register.html'" type="button">ลงทะเบียน</button>
+    </div>
+
+</body>
+<script>
+    firebase.auth().onAuthStateChanged(function(user){
+        if (user) {
+            window.location = 'home.html'
+        }
+    });
+    function Login() {
+        console.log('Login')
+        var email = document.getElementById("email").value
+        var password = document.getElementById("password").value
+        
+        if (email == '' || password == '') {
+            window.alert('กรุณากรอกข้อมูลให้ครบถ้วน')
+            return 0
+        }
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error, test) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                window.alert(errorMessage)
+            })
+            .then(function (success) {
+                if (success !== undefined) {
+                    console.log('success: ', success)
+                    window.location = 'home.html'
+                }
+            })
+    }
+
+
+
+</script>
+
+</html>
