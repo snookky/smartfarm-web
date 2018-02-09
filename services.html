@@ -8,6 +8,20 @@
   	<meta name="author" content="Brad Traversy">
     <title>Acme Web Deisgn | Services</title>
 
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDk51ePE-urT7Is4Qn8h04CZJlT8tjgSFk",
+        authDomain: "senior-project-5657a.firebaseapp.com",
+        databaseURL: "https://senior-project-5657a.firebaseio.com",
+        projectId: "senior-project-5657a",
+        storageBucket: "senior-project-5657a.appspot.com",
+        messagingSenderId: "1089154992933"
+      };
+      firebase.initializeApp(config);
+    </script>
+
     <style>
     body{
       font: 15px/1.5 Arial, Helvetica,sans-serif;
@@ -52,7 +66,7 @@
       color:#ffffff;
       padding-top:30px;
       min-height:70px;
-      border-bottom:#e8491d 3px solid;
+      border-bottom:rgb(71, 54, 35) 3px solid;
     }
 
     header a{
@@ -91,6 +105,22 @@
       font-weight:bold;
     }
 
+    header h4{
+      margin:0px;
+    }
+
+    header button{
+      height:38px;
+      font-size: 16px;
+      background:#4CAF50;
+      border:0;
+      padding-left: 10px;
+      padding-right:10px;
+      margin-top: -20px;
+      color:#ffffff;
+      cursor: pointer;
+    }
+
     /* Showcase */
     #showcase{
       min-height:750px;
@@ -105,7 +135,7 @@
       color:#ffffff;
       background-color:rgb(28, 57, 22);
       text-align: center;
-      border-top:#e8491d 3px solid;
+      border-top:rgb(71, 54, 35) 3px solid;
     }
 
     /* Media Queries */
@@ -149,13 +179,15 @@
     <header>
       <div class="container">
         <div id="branding">
-          <h1><span class="highlight">Acme</span> Web Design</h1>
+          <h1><span class="highlight">Watering</span> system</h1>
         </div>
         <nav>
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li class="current"><a href="services.html">Services</a></li>
+            <li><button onclick="Logout()">LOG OUT</button></li>
+            <li><h4><span class="highlight">Welcome : </span><span id="email"></span></h4></li>
           </ul>
         </nav>
       </div>
@@ -218,7 +250,33 @@
     </section>
 
     <footer>
-      <p>Acme Web Deisgn, Copyright &copy; 2017</p>
+      <p>Watering system, Copyright &copy; 2018</p>
     </footer>
   </body>
+
+  <script>
+
+      firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+              // User is signed in.
+              var displayName = user.displayName;
+              var email = user.email;
+              var emailVerified = user.emailVerified;
+              var photoURL = user.photoURL;
+              var isAnonymous = user.isAnonymous;
+              var uid = user.uid;
+              var providerData = user.providerData;
+              document.getElementById('email').innerHTML = email
+              console.log(email, uid)
+              // ...
+          } else {
+              window.location = 'index.html'
+          }
+      });
+
+      function Logout() {
+          firebase.auth().signOut();
+      }
+  </script>
+
 </html>
