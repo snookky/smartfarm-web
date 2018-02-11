@@ -125,19 +125,90 @@
 
     /* Showcase */
     #showcase{
-      min-height:790px;
+      min-height:500px;
       background:url('pexels-photo.jpeg') no-repeat 0 -400px;
       text-align:center;
       color:#ffffff;
     }
 
-    .aa{
-      margin-top: 250px;
+    #showcase h1{
+      margin-top:100px;
+      font-size:55px;
+      margin-bottom:10px;
+    }
+
+    #showcase p{
+      font-size:20px;
+    }
+
+    /* Newsletter */
+    #newsletter{
+      padding:15px;
+      color:#ffffff;
+      background:#35424a
+    }
+
+    #newsletter h1{
+      float:left;
+    }
+
+    #newsletter form {
+      float:right;
+      margin-top:15px;
+    }
+
+    #newsletter input[type="email"]{
+      padding:4px;
+      height:25px;
+      width:250px;
+    }
+
+    /* Boxes */
+    #boxes{
+      margin-top:20px;
+    }
+
+    #boxes .box{
+      float:left;
+      text-align: center;
+      width:30%;
+      padding:10px;
+    }
+
+    #boxes .box img{
+      width:90px;
+    }
+
+    /* Sidebar */
+    aside#sidebar{
+      float:right;
+      width:30%;
+      margin-top:10px;
+    }
+
+    aside#sidebar .quote input, aside#sidebar .quote textarea{
+      width:90%;
+      padding:5px;
+    }
+
+    /* Main-col */
+    article#main-col{
+      float:left;
+      width:65%;
+    }
+
+    /* Services */
+    ul#services li{
+      list-style: none;
+      padding:20px;
+      border: #cccccc solid 1px;
+      margin-bottom:5px;
+      background:#e6e6e6;
     }
 
     footer{
       padding:20px;
-      margin-top:0px;
+      margin-top:20px;
       color:#ffffff;
       background-color:rgb(28, 57, 22);
       text-align: center;
@@ -149,8 +220,6 @@
       header #branding,
       header nav,
       header nav li,
-      #newsletter h1,
-      #newsletter form,
       #boxes .box,
       article#main-col,
       aside#sidebar{
@@ -165,16 +234,6 @@
 
       #showcase h1{
         margin-top:40px;
-      }
-
-      #newsletter button, .quote button{
-        display:block;
-        width:100%;
-      }
-
-      #newsletter form input[type="email"], .quote input, .quote textarea{
-        width:100%;
-        margin-bottom:5px;
       }
     }
 
@@ -191,17 +250,57 @@
         </div>
         <nav>
           <ul>
+            <li><h4><span id="email"></span></h4></li>
             <li class="current"><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
             <li><button onclick="Logout()">LOG OUT</button></li>
-            <li><h4><span class="highlight">Welcome : </span><span id="email"></span></h4></li>
           </ul>
         </nav>
       </div>
     </header>
 
     <section id="showcase">
+      <div class="container">
+        <h1>Affordable Professional Web Design</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu luctus ipsum, rhoncus semper magna. Nulla nec magna sit amet sem interdum condimentum.</p>
+      </div>
+    </section>
+
+    <section id="boxes">
+      <div class="container">
+        <h1>กรุณาเลือกรูปแบบการทำงาน</h1>
+        <form>
+          <select id="mySelect">
+            <option>auto</option>
+            <option>manual</option>
+          </select>
+          <button onclick="getOption()" type="button" class="button_1">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <!--<section id="boxes">
+      <div class="container">
+        <div class="box">
+          <img src="./img/logo_html.png">
+          <h3>HTML5 Markup</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</p>
+        </div>
+        <div class="box">
+          <img src="./img/logo_css.png">
+          <h3>CSS3 Styling</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</p>
+        </div>
+        <div class="box">
+          <img src="./img/logo_brush.png">
+          <h3>Graphic Design</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</p>
+        </div>
+      </div>
+    </section>-->
+
+    <!--<section id="showcase">
       <div class="container">
 
         <h2 class="aa">ความชื้นปัจจุบัน : <span id="moisture"></span></h2>
@@ -218,7 +317,7 @@
         <h2>ระบบ : <span id="type"></span></h2>
 
       </div>
-    </section>
+    </section>-->
 
     <footer>
       <p>Watering system, Copyright &copy; 2018</p>

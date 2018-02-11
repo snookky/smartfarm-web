@@ -121,14 +121,6 @@
       cursor: pointer;
     }
 
-    /* Showcase */
-    #showcase{
-      min-height:750px;
-      background:url('../img/showcase.jpg') no-repeat 0 -400px;
-      text-align:center;
-      color:#ffffff;
-    }
-
     footer{
       padding:20px;
       margin-top:0px;
@@ -143,8 +135,6 @@
       header #branding,
       header nav,
       header nav li,
-      #newsletter h1,
-      #newsletter form,
       #boxes .box,
       article#main-col,
       aside#sidebar{
@@ -155,20 +145,6 @@
 
       header{
         padding-bottom:20px;
-      }
-
-      #showcase h1{
-        margin-top:40px;
-      }
-
-      #newsletter button, .quote button{
-        display:block;
-        width:100%;
-      }
-
-      #newsletter form input[type="email"], .quote input, .quote textarea{
-        width:100%;
-        margin-bottom:5px;
       }
     }
 
@@ -183,11 +159,11 @@
         </div>
         <nav>
           <ul>
+            <li><h4><span id="email"></span></h4></li>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li class="current"><a href="services.html">Services</a></li>
             <li><button onclick="Logout()">LOG OUT</button></li>
-            <li><h4><span class="highlight">Welcome : </span><span id="email"></span></h4></li>
           </ul>
         </nav>
       </div>
