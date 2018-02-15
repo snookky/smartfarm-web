@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Register</title>
+
 
     <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
     <script>
@@ -25,7 +26,7 @@
     body{
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: url(img.jpg);
       background-size: cover;
       background-repeat: no-repeat;
@@ -138,7 +139,7 @@
     <h2>สมัครสมาชิกใหม่</h2>
       <div class="inputBox">
         <input type="text" required="" id="name">
-        <label>Name</label>
+        <label>Username</label>
       </div>
       <div class="inputBox">
         <input type="text" required="" id="email">
@@ -147,6 +148,18 @@
       <div class="inputBox">
         <input type="text" required="" id="password">
         <label>Password</label>
+      </div>
+      <div class="inputBox">
+        <input type="text" required="" id="confirm-password">
+        <label>Confirm password</label>
+      </div>
+      <div class="inputBox">
+        <input type="text" required="" id="address"></input>
+        <label>Address</label>
+      </div>
+      <div class="inputBox">
+        <input type="text" required="" id="telephone"></input>
+        <label>Telephone number</label>
       </div>
         <button onclick="register()" type="button">ลงทะเบียน</button><br>
         <button onclick="window.location = 'index.html'" type="button">เข้าสู่ระบบ</button>
@@ -183,7 +196,11 @@
         var name = document.getElementById("name").value
         var email = document.getElementById("email").value
         var password = document.getElementById("password").value
-        if (name !== '' || email !== '' || password !== '') {
+        var confirmPassword = document.getElementById('confirm-password').value
+        var address = document.getElementById('address').value
+        var telephone = document.getElementById('telephone').value
+        if (name !== '' || email !== '' || password !== '' || confirmPassword !== '' || address !== '' || telephone !== '') {
+          if(password == confirmPassword) {
           checkSame(name).then(function(value) {
             console.log('checkSame: ' , value)
             if(value !== true) {
@@ -192,14 +209,21 @@
                   var errorMessage = error.message;
                   console.log('register', errorCode, errorMessage)
                   console.log('test', test)
+                  if (errorCode == 'auth/email-already-in-use') {
+                    window.alert('อีเมล์ซ้ำ')
+                  }
               })
               .then(function (success) {
                 if (success !== undefined) {
+                  console.log(success)
+                  console.log('uid', success.uid)
                   var firebaseRef = firebase.database().ref('users');
                   firebaseRef.push({
                       name,
                       email,
-                      password
+                      address,
+                      telephone,
+                      uid: success.uid
                   }).then(re => {
                       window.location = 'home.html'
                   })
@@ -209,6 +233,9 @@
               window.alert('ชื่อซ้ำ')
             }
           })
+        } else {
+          window.alert('รหัสผ่านไม่ตรง')
+        }
         } else {
           window.alert('กรุณากรอกข้อมูลให้ครบถ้วน')
         }

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDk51ePE-urT7Is4Qn8h04CZJlT8tjgSFk",
+        authDomain: "senior-project-5657a.firebaseapp.com",
+        databaseURL: "https://senior-project-5657a.firebaseio.com",
+        projectId: "senior-project-5657a",
+        storageBucket: "senior-project-5657a.appspot.com",
+        messagingSenderId: "1089154992933"
+      };
+      firebase.initializeApp(config);
+    </script>
+  </head>
+  <body>
+    <h2>Setting</h2>
+    <div class="inputBox">
+      <input disabled type="text" required="" id="name">
+      <label>Username</label>
+    </div>
+    <div class="inputBox">
+      <input disabled type="text" required="" id="address"></input>
+      <label>Address</label>
+    </div>
+    <div class="inputBox">
+      <input disabled type="text" required="" id="telephone"></input>
+      <label>Telephone number</label>
+    </div>
+    <button id="edit" onClick="Edit()">แก้ไข</button>
+    <button id="cancel" onClick="Cancel()" style="display:none;">ยกเลิก</button>
+    <button id="save" onClick="Save()" style="display:none;">บันทึก</button>
+  </body>
+</html>
+<script>
+
+  let name = ''
+  let address = ''
+  let telephone = ''
+  let user_id = ''
+  let key = ''
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      console.log(user.uid);
+      let user_id = user.uid
+      var rootRef = firebase.database().ref()
+      rootRef.child("users").on("value", function(snapshot) {
+        snapshot.forEach(data =>  {
+          if(data.val().uid == user_id) {
+            console.log('true', data.val())
+            name = data.val().name
+            address = data.val().address
+            telephone = data.val().telephone
+            key = data.key
+            let nameInput = document.getElementById('name')
+            // let passwordInput = document.getElementById('password')
+            let addressInput = document.getElementById('address')
+            let telephoneInput = document.getElementById('telephone')
+            nameInput.value = name
+            addressInput.value = address
+            telephoneInput.value = telephone
+          }
+        })
+          console.log("users:", snapshot.val())
+      })
+
+    }
+  });
+
+
+  var isEdit = false
+
+  function Edit () {
+      EnterEdit()
+  }
+  function Cancel () {
+      ExitEdit()
+      let nameInput = document.getElementById('name')
+      // let passwordInput = document.getElementById('password')
+      let addressInput = document.getElementById('address')
+      let telephoneInput = document.getElementById('telephone')
+      nameInput.value = name
+      addressInput.value = address
+      telephoneInput.value = telephone
+  }
+  function Save () {
+    let nameInput = document.getElementById('name').value
+    // let passwordInput = document.getElementById('password')
+    let addressInput = document.getElementById('address').value
+    let telephoneInput = document.getElementById('telephone').value
+    var rootRef = firebase.database().ref()
+    let root = rootRef.child("/users/" + key)
+    root.update({
+      name: nameInput,
+      address:addressInput,
+      telephone:telephoneInput
+    })
+      ExitEdit()
+  }
+  function EnterEdit () {
+    let editButton = document.getElementById('edit')
+    let cancelButton = document.getElementById('cancel')
+    let saveButton = document.getElementById('save')
+    cancelButton.style.display = 'block'
+    saveButton.style.display = 'block'
+    editButton.style.display = 'none'
+    let nameInput = document.getElementById('name')
+    // let passwordInput = document.getElementById('password')
+    let addressInput = document.getElementById('address')
+    let telephoneInput = document.getElementById('telephone')
+    nameInput.removeAttribute('disabled')
+    // passwordInput.removeAttribute('disabled')
+    addressInput.removeAttribute('disabled')
+    telephoneInput.removeAttribute('disabled')
+  }
+  function ExitEdit () {
+    let editButton = document.getElementById('edit')
+    let cancelButton = document.getElementById('cancel')
+    let saveButton = document.getElementById('save')
+    cancelButton.style.display = 'none'
+    saveButton.style.display = 'none'
+    editButton.style.display = 'block'
+    let nameInput = document.getElementById('name')
+    // let passwordInput = document.getElementById('password')
+    let addressInput = document.getElementById('address')
+    let telephoneInput = document.getElementById('telephone')
+    nameInput.setAttribute('disabled', true)
+    // passwordInput.setAttribute('disabled', true)
+    addressInput.setAttribute('disabled', true)
+    telephoneInput.setAttribute('disabled', true)
+  }
+
+
+</script>

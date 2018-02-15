@@ -25,7 +25,7 @@
     body{
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: url(img.jpg);
       background-size: cover;
       background-repeat: no-repeat;
@@ -168,12 +168,17 @@
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error, test) {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                window.alert(errorMessage)
+                if (errorCode == 'auth/wrong-password') {
+                  window.alert('รหัสผิดพลาด')
+                }
+                else {
+                  window.alert('ไม่พบผู้ใช้นี้ในระบบ')
+                }
             })
             .then(function (success) {
                 if (success !== undefined) {
                     console.log('success: ', success)
-                    window.location = 'home.html'
+                    window.location = ''
                 }
             })
     }

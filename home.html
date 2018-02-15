@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Home</title>
 
     <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
     <script>
@@ -205,10 +205,13 @@
       margin-bottom:5px;
       background:#e6e6e6;
     }
+    #option{
+      background-color: rgb(71, 54, 35);
+      margin: 0px;
+    }
 
     footer{
       padding:20px;
-      margin-top:20px;
       color:#ffffff;
       background-color:rgb(28, 57, 22);
       text-align: center;
@@ -254,6 +257,7 @@
             <li class="current"><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
+            <li><button onclick="window.location = 'setting.html'">Setting</button></li>
             <li><button onclick="Logout()">LOG OUT</button></li>
           </ul>
         </nav>
@@ -267,20 +271,19 @@
       </div>
     </section>
 
-    <section id="boxes">
+    <section id="option">
       <div class="container">
         <h1>กรุณาเลือกรูปแบบการทำงาน</h1>
-        <form>
-          <select id="mySelect">
-            <option>auto</option>
-            <option>manual</option>
-          </select>
-          <button onclick="getOption()" type="button" class="button_1">Subscribe</button>
-        </form>
+        <select id="mySelect">
+          <option>Auto</option>
+          <option>Manual</option>
+        </select>
+          <button onclick="myFunction()">Submit</button>
+          <p id="demo"></p>
       </div>
     </section>
 
-    <!--<section id="boxes">
+    <section id="boxes">
       <div class="container">
         <div class="box">
           <img src="./img/logo_html.png">
@@ -298,7 +301,7 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus mi augue, viverra sit amet ultricies</p>
         </div>
       </div>
-    </section>-->
+    </section>
 
     <!--<section id="showcase">
       <div class="container">
@@ -350,7 +353,21 @@
     }
 </script>
 
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+  function myFunction() {
+      var x = document.getElementById("mySelect").selectedIndex
+      document.getElementById("demo").innerHTML = x;
+
+      if (x == 0) {
+        window.location.href='services.html';
+      }
+      else if (x == 1) {
+         window.location.href='about.html';
+      }
+  }
+</script>
+
+<!--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <script>
     var rootRef = firebase.database().ref()
@@ -379,6 +396,6 @@
     $("#manual").click(function () {
         rootRef.child("Type").set("manual")
     })
-</script>
+</script>-->
 
 </html>
