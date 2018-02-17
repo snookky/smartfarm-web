@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>login</title>
 
     <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
     <script>
@@ -26,10 +26,32 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url(img.jpg);
+      background-color: rgb(180, 180, 180);
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;
+    }
+
+    /* Header **/
+    header{
+      background:rgb(28, 57, 22);
+      color:#ffffff;
+      padding-top:30px;
+      min-height:70px;
+      border-bottom:rgb(71, 54, 35) 3px solid;
+    }
+
+    header #branding{
+      text-align: center;
+    }
+
+    header #branding h1{
+      margin:0;
+    }
+
+    header .highlight{
+      color:#e8491d;
+      font-weight:bold;
     }
 
     .box{
@@ -135,8 +157,16 @@
 
 <body>
 
+    <header>
+      <div class="container">
+        <div id="branding">
+          <h1><span class="highlight">Watering</span> system</h1>
+        </div>
+      </div>
+    </header>
+
     <div class="box">
-      <h2>เข้าสู่ระบบ</h2>
+      <h2>ลงชื่อเข้าใช้</h2>
         <div class="inputBox">
           <input type="text" name="" required="" id="email">
           <label>Email</label>
@@ -145,8 +175,8 @@
           <input type="password" name="" required="" id="password">
           <label>Password</label>
         </div>
-          <button onclick="Login()" type="submit">เข้าสู่ระบบ</button><br>
-          <button onclick="window.location = 'register.html'" type="button">ลงทะเบียน</button>
+          <button onclick="Login()" type="submit">ลงชื่อเข้าใช้</button><br>
+          <button onclick="window.location = 'register.html'" type="button">ลงทะเบียนบัญชีใหม่</button>
     </div>
 
 </body>

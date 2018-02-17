@@ -27,10 +27,32 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url(img.jpg);
+      background-color: rgb(180, 180, 180);
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;
+    }
+
+    /* Header **/
+    header{
+      background:rgb(28, 57, 22);
+      color:#ffffff;
+      padding-top:30px;
+      min-height:70px;
+      border-bottom:rgb(71, 54, 35) 3px solid;
+    }
+
+    header #branding{
+      text-align: center;
+    }
+
+    header #branding h1{
+      margin:0;
+    }
+
+    header .highlight{
+      color:#e8491d;
+      font-weight:bold;
     }
 
     .box{
@@ -135,8 +157,17 @@
 </head>
 
 <body>
+
+  <header>
+    <div class="container">
+      <div id="branding">
+        <h1><span class="highlight">Watering</span> system</h1>
+      </div>
+    </div>
+  </header>
+
   <div class="box">
-    <h2>สมัครสมาชิกใหม่</h2>
+    <h2>ลงทะเบียนบัญชีใหม่</h2>
       <div class="inputBox">
         <input type="text" required="" id="name">
         <label>Username</label>
@@ -162,10 +193,11 @@
         <label>Telephone number</label>
       </div>
         <button onclick="register()" type="button">ลงทะเบียน</button><br>
-        <button onclick="window.location = 'index.html'" type="button">เข้าสู่ระบบ</button>
+        <button onclick="window.location = 'index.html'" type="button">ลงชื่อเข้าใช้</button>
   </div>
 
 </body>
+
 <script>
   function checkSame (name) {
     return new Promise(function (resolve,reject){
